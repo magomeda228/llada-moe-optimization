@@ -71,7 +71,7 @@ This implementation relies on monkey-patching specific internal classes of the `
 
 ## Contributing
 
-Contributions are welcome! If you have ideas for further optimizations (e.g., Triton kernels for the router), please open an issue or submit a PR
+Contributions are welcome! If you have interesting ideas for further optimizations (e.g., Triton kernels for the router), please open an issue or submit a PR
 
 gmail: alexeymanakonov@gmail.com
 tg: @alexeo_0man
