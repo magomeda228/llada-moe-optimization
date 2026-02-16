@@ -1,4 +1,4 @@
-# 🚀 LLaDA MoE Optimization
+# LLaDA MoE Optimization
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/get-started/locally/)
@@ -15,7 +15,7 @@ The standard LLaDA MoE implementation often struggle with low GPU utilization du
 - Memory Coalescing: Grouping expert weights into unified buffers for faster VRAM access
 - Token Rearrangement: Efficiently grouping tokens by assigned experts to maximize compute density
 
-## 📈 Performance Benchmarks
+## Performance Benchmarks
 
 [cite_start]Experiments conducted on an **NVIDIA A100 (40/80GB)** with `transformers == 4.57.6`[cite: 12, 80]:
 
