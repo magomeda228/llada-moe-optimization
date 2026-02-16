@@ -7,23 +7,24 @@
 High-performance optimization suite for LLaDA (Large Language Diffusion Assistant) Mixture-of-Experts (MoE) layers. This implementation transforms the inference regime from a CPU-bound state to a hardware-saturated, compute-bound state
 ---
 
-## Overview
+## 📈 Performance Benchmarks
 
-The standard LLaDA MoE implementation often struggle with low GPU utilization due to Python-side dispatching loops and fragmented memory access. When scaling LLaDA to multiple experts, these bottlenecks become critical at num_group = 1 geneartion
+### Environment & Setup
+[cite_start]All experiments were conducted on an **NVIDIA A100 (40GB/80GB)**[cite: 12, 80]. [cite_start]Measurements were averaged over eight independent runs to ensure statistical consistency[cite: 74].
+* [cite_start]**Transformers Version**: 4.57.6 [cite: 80]
+* [cite_start]**Task**: LLaDA-MoE inference (max length 128) [cite: 104]
 
-`FastLLaDAMoE` addresses these issues by:
-- Memory Coalescing: Grouping expert weights into unified buffers for faster VRAM access
-- Token Rearrangement: Efficiently grouping tokens by assigned experts to maximize compute density
+### Acceleration Metrics
+By transitioning from fragmented memory access to the **Sort-Compute-Scatter** pipeline, we achieved:
+* [cite_start]**CUDA Speedup**: Mean execution time ratio of **$1.8883 \pm 0.0030$**[cite: 87, 172].
+* [cite_start]**Memory Throughput**: Effective bandwidth utilization increased by a ratio of **$1.9251 \pm 0.0066$**[cite: 83, 172].
+* [cite_start]**Hardware Efficiency**: SM utilization improved by a factor of **$1.2541 \pm 0.0009$**[cite: 83, 174].
 
-## Performance Benchmarks
-
-[cite_start]Experiments conducted on an **NVIDIA A100 (40/80GB)** with `transformers == 4.57.6`[cite: 12, 80]:
-
-* [cite_start]**CUDA Speedup**: Achieved a mean execution time ratio of **$1.8883 \pm 0.0030$**[cite: 87, 172]
-* [cite_start]**Memory Throughput**: Nearly doubled effective memory bandwidth utilization with a ratio of **$1.9251 \pm 0.0066$**[cite: 83, 172]
-* [cite_start]**Hardware Efficiency**: Increased SM utilization by a factor of **$1.2541 \pm 0.0009$**[cite: 83, 174]
-* [cite_start]**Mathematical Parity**: Validated on **GSM8K** with identical **50% accuracy**, confirming full parity with the native MoE block[cite: 102, 178]
-
+### Mathematical Parity
+The optimization maintains full mathematical equivalence with the native implementation:
+* [cite_start]**Benchmark**: GSM8K test set (50 samples)[cite: 102].
+* [cite_start]**Accuracy**: **50%** for both baseline and optimized versions[cite: 102, 178].
+* [cite_start]**Verification**: Confirmed that Sort-Compute-Scatter does not compromise model performance[cite: 104, 178].
 ## Installation
 
 1. Clone the repository:
