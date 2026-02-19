@@ -10,21 +10,22 @@ High-performance optimization suite for LLaDA (Large Language Diffusion Assistan
 ## Performance Benchmarks
 
 ### Environment & Setup
-[cite_start]All experiments were conducted on an **NVIDIA A100 (40GB/80GB)**[cite: 12, 80]. [cite_start]Measurements were averaged over eight independent runs to ensure statistical consistency[cite: 74].
-* [cite_start]**Transformers Version**: 4.57.6 [cite: 80]
-* [cite_start]**Task**: LLaDA-MoE inference (max length 128) [cite: 104]
+All experiments were conducted on an **NVIDIA A100 (40GB/80GB)**
+Measurements were averaged over eight independent runs to ensure statistical consistency
+**Transformers Version**: 4.57.6
+**Task**: LLaDA-MoE inference (max length 128)
 
 ### Acceleration Metrics
 By transitioning from fragmented memory access to the **Sort-Compute-Scatter** pipeline, we achieved:
-* [cite_start]**CUDA Speedup**: Mean execution time ratio of **$1.8883 \pm 0.0030$**[cite: 87, 172]
-* [cite_start]**Memory Throughput**: Effective bandwidth utilization increased by a ratio of **$1.9251 \pm 0.0066$**[cite: 83, 172]
-* [cite_start]**Hardware Efficiency**: SM utilization improved by a factor of **$1.2541 \pm 0.0009$**[cite: 83, 174] (at 1 batch size)
+* **CUDA Speedup**: Mean execution time ratio of **$1.8883 \pm 0.0030$**
+* **Memory Throughput**: Effective bandwidth utilization increased by a ratio of **$1.9251 \pm 0.0066$**
+* **Hardware Efficiency**: SM utilization improved by a factor of **$1.2541 \pm 0.0009$** (at 1 batch size)
 
 ### Mathematical Parity
 The optimization maintains full mathematical equivalence with the native implementation:
-* [cite_start]**Benchmark**: GSM8K test set (50 samples)[cite: 102]
-* [cite_start]**Accuracy**: **50%** for both baseline and optimized versions[cite: 102, 178]
-* [cite_start]**Verification**: Confirmed that Sort-Compute-Scatter does not compromise model performance[cite: 104, 178]
+* **Benchmark**: GSM8K test set (50 samples)
+* **Accuracy**: **50%** for both baseline and optimized versions
+* **Verification**: Confirmed that Sort-Compute-Scatter does not compromise model performance
 ## Installation
 
 1. Clone the repository:
